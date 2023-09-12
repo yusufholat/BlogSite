@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlogSite.Entities\BlogSite.Entities.csproj" />
+    <ProjectReference Include="..\BlogSite.Shared\BlogSite.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Concreate\" />
+  </ItemGroup>
+
 </Project>
