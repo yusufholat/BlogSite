@@ -4,7 +4,7 @@ using BlogSite.Shared.Data.Concreate.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace BlogSite.Data.Concreate
+namespace BlogSite.Data.Concreate.EntityFramework.Repositories
 {
     internal class EfRoleRepository : EfEntityRepositoryBase<Role>, IRoleRepository
     {
