@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogSite.Data.Concreate
 {
-    public class ArcticleRepository : EfEntityRepositoryBase<Article>, IArcticleRepository
+    public class EfArcticleRepository : EfEntityRepositoryBase<Article>, IArcticleRepository
     {
-        public ArcticleRepository(DbContext context) : base(context)
+        public EfArcticleRepository(DbContext context) : base(context)
         {
             
         }

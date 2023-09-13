@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogSite.Data.Concreate
 {
-    public class CommentRepository : EfEntityRepositoryBase<Comment>, ICommentRepository
+    public class EfCategoryRepository : EfEntityRepositoryBase<Category>, ICategoryRepository
     {
-        public CommentRepository(DbContext context) : base(context)
+        public EfCategoryRepository(DbContext context) : base(context)
         {
         }
     }
