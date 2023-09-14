@@ -50,6 +50,7 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
                 RoleId = 1,
                 FirstName = "Yusuf",
                 LastName = "Holat",
+                Username = "ziroo",
                 Email = "yusufholat@gmail.com",
                 Description = "ilk admin kullanicisi",
                 Picture = "https://coffective.com/default-featured-image-png/",

@@ -58,7 +58,7 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
                 },
                 new Category
                 {
-                    Id = 1,
+                    Id = 3,
                     Name = "Java",
                     Description = "Java programlama dili",
                     IsActive = true,

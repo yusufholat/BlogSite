@@ -1,6 +1,7 @@
 ﻿using BlogSite.Data.Concreate.EntityFramework.Mappings;
 using BlogSite.Entities.Concreate;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 
 namespace BlogSite.Data.Concreate.EntityFramework.Contexts
@@ -15,8 +16,7 @@ namespace BlogSite.Data.Concreate.EntityFramework.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //todo connection string
-            optionsBuilder.UseSqlServer(connectionString: "Server=(localdb)\\********;Database=*******;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
+            optionsBuilder.UseSqlServer(connectionString: "localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
