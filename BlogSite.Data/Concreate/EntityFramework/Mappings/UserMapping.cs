@@ -1,7 +1,7 @@
 ﻿using BlogSite.Entities.Concreate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+using System.Text;
 
 namespace BlogSite.Data.Concreate.EntityFramework.Mappings
 {
@@ -42,6 +42,26 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
             //user has one role, role has more than one user
 
             builder.ToTable("Users");
+
+            //initial data for user table after table created
+            builder.HasData(new User
+            {
+                Id = 1,
+                RoleId = 1,
+                FirstName = "Yusuf",
+                LastName = "Holat",
+                Email = "yusufholat@gmail.com",
+                Description = "ilk admin kullanicisi",
+                Picture = "https://coffective.com/default-featured-image-png/",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note = "admin kullanicisi",
+                PasswordHash = Encoding.ASCII.GetBytes("91170e2dc9c41968317def6e42bc586a") //password ziroo hashed md5
+            });
 
         }
     }

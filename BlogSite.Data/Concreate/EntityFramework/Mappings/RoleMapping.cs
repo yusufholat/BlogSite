@@ -27,8 +27,23 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
             builder.Property(a => a.IsDeleted).IsRequired();
             builder.Property(a => a.Note).HasMaxLength(500);
 
-            builder.ToTable("Roles");
+            builder.ToTable("Roles"); //created role table
 
+            //then
+            //initial data to db
+            builder.HasData(new Role
+            {
+                Id = 1,
+                Name = "Admin",
+                Description = "Admin Rolu Tum Haklara Sahiptir.",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note = "Admin Roludur."
+            });
         }
     }
 }
