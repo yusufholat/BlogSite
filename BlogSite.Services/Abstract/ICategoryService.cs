@@ -10,9 +10,10 @@ namespace BlogSite.Services.Abstract
     {
         Task<IDataResult<Category>> Get(int categoryId);
         Task<IDataResult<IList<Category>>> GetAll();
+        Task<IDataResult<IList<Category>>> GetAllNonDeleted();
         Task<IResult> Add(CategoryAddDto category, string createdByName); //CategoryAddDto using for converting
         Task<IResult> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName);
-        Task<IResult> Delete(int categoryId); //not a real delete from db
+        Task<IResult> Delete(int categoryId, string modifiedByName); //not a real delete from db
         Task<IResult> HardDelete(int categoryId);
 
     }
