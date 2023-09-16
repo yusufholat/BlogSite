@@ -1,7 +1,11 @@
+using BlogSite.Services.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//it should be? ServiceCollectionExtensions.LoadMyServices(builder.Services);
 
 var app = builder.Build();
 

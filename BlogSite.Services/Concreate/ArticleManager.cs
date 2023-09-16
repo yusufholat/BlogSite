@@ -1,4 +1,5 @@
-﻿using BlogSite.Data.Abstact;
+﻿using AutoMapper;
+using BlogSite.Data.Abstact;
 using BlogSite.Entities.Concreate;
 using BlogSite.Entities.Dtos;
 using BlogSite.Services.Abstract;
@@ -16,10 +17,12 @@ namespace BlogSite.Services.Concreate
     public class ArticleManager : IArticleService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public ArticleManager(IUnitOfWork unitOfWork)
+        public ArticleManager(IUnitOfWork unitOfWork, Mapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<IDataResult<ArticleDto>> Get(int articleId)
@@ -97,25 +100,56 @@ namespace BlogSite.Services.Concreate
         }
 
 
-        public Task<IResult> Add(ArticleAddDto article, string createdByName)
+        public async Task<IResult> Add(ArticleAddDto articleAddDto, string createdByName)
         {
-            throw new NotImplementedException();
+            var article = _mapper.Map<Article>(articleAddDto); //this is converter
+            article.CreatedByName = createdByName;
+            article.ModifiedByName = createdByName;
+            article.UserId = 1; //will be change
+
+            await _unitOfWork.Articles.AddAsync(article).ContinueWith(t => _unitOfWork.SaveAsync());
+            return new Result(ResultStatus.Success, message: $"{articleAddDto.Title} baslikli makale basariyla eklenmistir");
+        }
+        public async Task<IResult> Update(ArticleUpdateDto articleUpdateDto, string modifiedByName)
+        {
+            var article = _mapper.Map<Article>(articleUpdateDto);
+            article.ModifiedByName = modifiedByName;
+            await _unitOfWork.Articles.UpdateAsync(article).ContinueWith(t => _unitOfWork.SaveAsync());
+
+            return new Result(ResultStatus.Success, message: $"{articleUpdateDto.Title} baslikli makale basariyla guncellenmistir");
         }
 
-        public Task<IResult> Delete(int articleId, string modifiedByName)
+        public async Task<IResult> Delete(int articleId, string modifiedByName)
         {
-            throw new NotImplementedException();
+            var result = await _unitOfWork.Articles.AnyAsnyc(a => a.Id == articleId);
+
+            if (result)
+            {
+                var article = await _unitOfWork.Articles.GetAsync(a => a.Id == articleId);
+                article.IsDeleted = false;
+                article.ModifiedByName = modifiedByName;
+                article.ModifiedDate = DateTime.Now;
+                await _unitOfWork.Articles.UpdateAsync(article).ContinueWith(_ => _unitOfWork.SaveAsync());
+
+                return new Result(ResultStatus.Success, message: $"{article.Title} baslikli makale basariyla silinmistir");
+            }
+            return new Result(ResultStatus.Error, message: "boyle bir makale bulunamadi");
         }
 
 
-        public Task<IResult> HardDelete(int articleId)
+        public async Task<IResult> HardDelete(int articleId)
         {
-            throw new NotImplementedException();
+            var result = await _unitOfWork.Articles.AnyAsnyc(a => a.Id == articleId);
+
+            if (result)
+            {
+                var article = await _unitOfWork.Articles.GetAsync(a => a.Id == articleId);
+                await _unitOfWork.Articles.DeleteAsync(article).ContinueWith(_ => _unitOfWork.SaveAsync());
+
+                return new Result(ResultStatus.Success, message: $"{article.Title} baslikli makale veritabanindan basariyla silinmistir");
+            }
+            return new Result(ResultStatus.Error, message: "boyle bir makale bulunamadi");
         }
 
-        public Task<IResult> Update(ArticleUpdateDto articleUpdateDto, string modifiedByName)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
