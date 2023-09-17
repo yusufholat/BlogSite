@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text;
 
+
 namespace BlogSite.Data.Concreate.EntityFramework.Mappings
 {
     public class UserMapping : IEntityTypeConfiguration<User>

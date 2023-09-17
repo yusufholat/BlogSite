@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 namespace BlogSite.Data.Concreate.EntityFramework.Mappings
 {
     public class CommentMapping : IEntityTypeConfiguration<Comment>

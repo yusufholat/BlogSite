@@ -1,7 +1,6 @@
 ﻿using BlogSite.Data.Concreate.EntityFramework.Mappings;
 using BlogSite.Entities.Concreate;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Metrics;
 
 
 namespace BlogSite.Data.Concreate.EntityFramework.Contexts
