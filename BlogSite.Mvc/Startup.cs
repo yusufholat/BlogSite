@@ -13,7 +13,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllersWithViews().AddRazorRuntimeCompilation();
-        //services.AddAutoMapper(typeof(Startup));
+        services.AddAutoMapper(typeof(Startup));
         services.LoadMyServices();
     }
 
