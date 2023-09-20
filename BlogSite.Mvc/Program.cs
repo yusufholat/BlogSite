@@ -4,9 +4,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+////
 //it should be? ServiceCollectionExtensions.LoadMyServices(builder.Services);
 
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services); //calling configureservices old version
+
 var app = builder.Build();
+
+startup.Configure(app, builder.Environment); //calling configure old version
+////
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
