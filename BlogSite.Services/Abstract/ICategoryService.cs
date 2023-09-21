@@ -1,5 +1,4 @@
-﻿using BlogSite.Entities.Concreate;
-using BlogSite.Entities.Dtos;
+﻿using BlogSite.Entities.Dtos;
 using BlogSite.Shared.Utilities.Results.Abstract;
 using BlogSite.Shared.Utilities.Results.ComplexTypes;
 

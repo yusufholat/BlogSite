@@ -20,6 +20,7 @@ namespace BlogSite.Services.Concreate
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public async Task<IDataResult<CategoryDto>> Get(int categoryId)
         {
             var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId, c=>c.Articles);
@@ -37,12 +38,13 @@ namespace BlogSite.Services.Concreate
         {
             var categories = await _unitOfWork.Categories.GetAllAsync(null, c => c.Articles);
             if (categories.Count > -1)
-                return new DataResult<CategoryListDto>(ResultStatus.Success,data:new CategoryListDto
+            {
+                return new DataResult<CategoryListDto>(ResultStatus.Success, data: new CategoryListDto
                 {
                     Categories = categories,
                     ResultStatus = ResultStatus.Success,
                 });
-
+            }
             return new DataResult<CategoryListDto>(ResultStatus.Error, data: null, message: "hicbir kategori bulunamadi");
         }
 
