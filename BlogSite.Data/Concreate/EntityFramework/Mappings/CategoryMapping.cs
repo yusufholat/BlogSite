@@ -29,6 +29,46 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
             builder.ToTable("Categories");
             //this entity not need to other entities, currently not have any other entity id's
 
+            //adding 3 new category data
+            builder.HasData(
+                new Category{
+                    Id = 1,
+                    Name = "C#",
+                    Description = "C# programlama dili",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "C# blog kategorisi",
+                }, 
+                new Category
+                {
+                    Id = 2,
+                    Name = "C++",
+                    Description = "C++ programlama dili",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "C++ blog kategorisi",
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "Java",
+                    Description = "Java programlama dili",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Java blog kategorisi",
+                });
         }
     }
 }
