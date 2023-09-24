@@ -6,6 +6,9 @@
 }
 @if(Model.ResultStatus == ResultStatus.Success)
 {
+    <div id="modalPlaceHolder" aria-hidden="true">
+
+    </div>
     <div class="card mb-4 mt-2">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
@@ -65,6 +68,14 @@
         </div>
     </div>
 }
+@if (Model.ResultStatus == ResultStatus.Error)
+{
+    <div class="alert alert-danger mt-3">
+        @Model.Message <br/>
+        Dashboard sayfasina geri donmek icin <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">tiklayiniz.</a>
+    </div>
+}
+
 @section Scripts
 {
     <script>
@@ -77,10 +88,10 @@
                 buttons: [
                     {
                         text: 'Ekle',
+                        attr: {
+                            id:"btnAdd",
+                        },
                         className: 'btn btn-success',
-                        action: function (e, dt, node, config) {
-                            alert('Button activated');
-                        }
                     },
                     {
                         text: 'Yenile',
@@ -340,6 +351,17 @@
                 }
             });
 
+
+            $(function () {
+                const url = '@Url.Action("Add",controller:"Category")';
+                const placeHolderDiv = $('#modalPlaceHolder');
+                $('#btnAdd').click(function () {
+                    $.get(url).done(function (data) {
+                        placeHolderDiv.html(data);
+                        placeHolderDiv.find(".modal").modal('show');
+                    });
+                });
+            });
         });
     </script>
 }

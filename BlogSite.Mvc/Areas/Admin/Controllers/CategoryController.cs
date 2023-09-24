@@ -1,5 +1,4 @@
 ﻿using BlogSite.Services.Abstract;
-using BlogSite.Shared.Utilities.Results.ComplexTypes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Mvc.Areas.Admin.Controllers
@@ -15,11 +14,12 @@ namespace BlogSite.Mvc.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var result = await _categoryService.GetAll(); 
-            if (result.ResultStatus == ResultStatus.Success) {
-                return View(result.Data);
-            }
+            return View(result.Data);
+        }
 
-            return View();
+        public IActionResult Add()
+        {
+            return PartialView("_CategoryAddPartial");
         }
     }
 }

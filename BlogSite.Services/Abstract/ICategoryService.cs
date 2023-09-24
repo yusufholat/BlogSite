@@ -12,8 +12,8 @@ namespace BlogSite.Services.Abstract
         Task<IDataResult<CategoryListDto>> GetAll();
         Task<IDataResult<CategoryListDto>> GetAllNonDeleted();
         Task<IDataResult<CategoryListDto>> GetAllNonDeletedAndActive();
-        Task<IResult> Add(CategoryAddDto category, string createdByName); //CategoryAddDto using for converting
-        Task<IResult> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName);
+        Task<IDataResult<CategoryDto>> Add(CategoryAddDto category, string createdByName); //CategoryAddDto using for converting
+        Task<IDataResult<CategoryDto>> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName);
         Task<IResult> Delete(int categoryId, string modifiedByName); //not a real delete from db
         Task<IResult> HardDelete(int categoryId);
 

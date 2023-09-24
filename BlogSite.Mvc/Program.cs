@@ -1,9 +1,10 @@
+using BlogSite.Services.AutoMapper.Profiles;
 using BlogSite.Services.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile));
 builder.Services.LoadMyServices();
 
 
