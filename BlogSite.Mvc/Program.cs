@@ -1,9 +1,15 @@
 using BlogSite.Services.AutoMapper.Profiles;
 using BlogSite.Services.Extensions;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)); //adding json resultformat
+    opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 builder.Services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile));
 builder.Services.LoadMyServices();
 
