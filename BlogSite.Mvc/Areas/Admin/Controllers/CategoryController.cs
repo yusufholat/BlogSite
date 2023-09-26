@@ -6,6 +6,7 @@ using BlogSite.Shared.Utilities.Results.ComplexTypes;
 using BlogSite.Shared.Utilities.Results.Concreate;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BlogSite.Mvc.Areas.Admin.Controllers
 {
@@ -50,6 +51,24 @@ namespace BlogSite.Mvc.Areas.Admin.Controllers
                 CategoryAddPartial = await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
             });
             return Json(categoryAddAjaxErrorModel);
+        }
+
+        public async Task<JsonResult> GetAllCategories()
+        {
+            var result = await _categoryService.GetAll();
+            var categories = JsonSerializer.Serialize(result.Data, new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+            return Json(categories);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Delete(int categoryId)
+        {
+            var result = await _categoryService.Delete(categoryId, "ziroo");
+            var ajaxResult = JsonSerializer.Serialize(result);
+            return Json(ajaxResult);
         }
     }
 }
