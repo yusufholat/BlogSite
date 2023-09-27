@@ -1,11 +1,12 @@
 ﻿using BlogSite.Data.Concreate.EntityFramework.Mappings;
 using BlogSite.Entities.Concreate;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace BlogSite.Data.Concreate.EntityFramework.Contexts
 {
-    public class ProgrammersBlogContext: DbContext
+    public class ProgrammersBlogContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -22,6 +23,11 @@ namespace BlogSite.Data.Concreate.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new CommentMapping());
             modelBuilder.ApplyConfiguration(new RoleMapping());
             modelBuilder.ApplyConfiguration(new UserMapping());
+            modelBuilder.ApplyConfiguration(new RoleClaimMapping());
+            modelBuilder.ApplyConfiguration(new UserClaimMapping());
+            modelBuilder.ApplyConfiguration(new UserLoginMapping());
+            modelBuilder.ApplyConfiguration(new UserRoleMapping());
+            modelBuilder.ApplyConfiguration(new UserTokenMapping());
         }
     }
 }

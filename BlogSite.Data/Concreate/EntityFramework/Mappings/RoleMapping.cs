@@ -9,41 +9,30 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
+            // Primary key
             builder.HasKey(r => r.Id);
-            builder.Property(r => r.Id).ValueGeneratedOnAdd(); //auto increment
-            builder.Property(r =>r.Name).IsRequired();
-            builder.Property(r => r.Name).HasMaxLength(30);
-            builder.Property(r => r.Description).IsRequired();
-            builder.Property(r => r.Description).HasMaxLength(250);
 
-            //from entitybase
-            builder.Property(a => a.CreatedByName).IsRequired();
-            builder.Property(a => a.CreatedByName).HasMaxLength(50);
-            builder.Property(a => a.ModifiedByName).IsRequired();
-            builder.Property(a => a.ModifiedByName).HasMaxLength(50);
-            builder.Property(a => a.CreatedDate).IsRequired();
-            builder.Property(a => a.ModifiedDate).IsRequired();
-            builder.Property(a => a.IsActive).IsRequired();
-            builder.Property(a => a.IsDeleted).IsRequired();
-            builder.Property(a => a.Note).HasMaxLength(500);
+            // Index for "normalized" role name to allow efficient lookups
+            builder.HasIndex(r => r.NormalizedName).HasDatabaseName("RoleNameIndex").IsUnique();
 
-            builder.ToTable("Roles"); //created role table
+            // Maps to the AspNetRoles table
+            builder.ToTable("AspNetRoles");
 
-            //then
-            //initial data to db
-            builder.HasData(new Role
-            {
-                Id = 1,
-                Name = "Admin",
-                Description = "Admin Rolu Tum Haklara Sahiptir.",
-                IsActive = true,
-                IsDeleted = false,
-                CreatedByName = "InitialCreate",
-                CreatedDate = DateTime.Now,
-                ModifiedByName = "InitialCreate",
-                ModifiedDate = DateTime.Now,
-                Note = "Admin Roludur."
-            });
+            // A concurrency token for use with the optimistic concurrency checking
+            builder.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();
+
+            // Limit the size of columns to use efficient database types
+            builder.Property(u => u.Name).HasMaxLength(100);
+            builder.Property(u => u.NormalizedName).HasMaxLength(100);
+
+            // The relationships between Role and other entity types
+            // Note that these relationships are configured with no navigation properties
+
+            // Each Role can have many entries in the UserRole join table
+            builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.RoleId).IsRequired();
+
+            // Each Role can have many associated RoleClaims
+            builder.HasMany<RoleClaim>().WithOne().HasForeignKey(rc => rc.RoleId).IsRequired();
         }
     }
 }
