@@ -11,8 +11,6 @@ namespace BlogSite.Data.Concreate
         private EfArcticleRepository _efArcticleRepository;
         private EfCategoryRepository _efCategoryRepository;
         private EfCommentRepository _efCommentRepository;
-        private EfRoleRepository _efRoleRepository;
-        private EfUserRepository _efUserRepository;
 
         public UnitOfWork(ProgrammersBlogContext context)
         {
@@ -22,8 +20,6 @@ namespace BlogSite.Data.Concreate
         public IArcticleRepository Articles => _efArcticleRepository ?? new EfArcticleRepository(_context);
         public ICategoryRepository Categories => _efCategoryRepository ?? new EfCategoryRepository(_context);
         public ICommentRepository Comments => _efCommentRepository ?? new EfCommentRepository(_context);
-        public IRoleRepository Roles => _efRoleRepository ?? new EfRoleRepository(_context);
-        public IUserRepository Users => _efUserRepository ?? new EfUserRepository(_context);
 
         public async ValueTask DisposeAsync()
         {

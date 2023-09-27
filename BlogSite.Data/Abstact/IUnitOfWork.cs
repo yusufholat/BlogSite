@@ -8,8 +8,6 @@ namespace BlogSite.Data.Abstact
         IArcticleRepository Articles {  get; }
         ICategoryRepository Categories { get; }
         ICommentRepository Comments { get; }
-        IRoleRepository Roles { get; }
-        IUserRepository Users { get; }
         Task<int> SaveAsync(); //effected saved elements
     }
 }
