@@ -8,8 +8,8 @@ namespace BlogSite.Shared.Data.Abstract
     {
         Task<T> GetAsync(Expression<Func<T,bool>> predicate, params Expression<Func<T, object>>[] includeProperties); //multi include
         Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties);
-        Task AddAsync(T entity);
-        Task UpdateAsync(T entity);
+        Task<T> AddAsync(T entity);
+        Task<T> UpdateAsync(T entity);
         Task DeleteAsync(T entity);
         Task <bool> AnyAsnyc(Expression<Func<T, bool>> predicate);
         Task <int> CountAsnyc(Expression<Func<T, bool>> predicate);
