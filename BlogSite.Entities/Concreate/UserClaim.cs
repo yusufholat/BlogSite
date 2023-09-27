@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-;
+
 
 namespace BlogSite.Entities.Concreate
 {
