@@ -10,8 +10,23 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonO
     opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)); //adding json resultformat
     opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
+builder.Services.AddSession();
 builder.Services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile));
 builder.Services.LoadMyServices();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = new PathString("/Admin/User/Login");
+    options.LogoutPath = new PathString("/Admin/User/Logout");
+    options.Cookie = new CookieBuilder {
+        Name = "BlogSite",
+        HttpOnly = true,
+        SameSite = SameSiteMode.Strict,
+        SecurePolicy = CookieSecurePolicy.SameAsRequest //should always for security
+    };
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
+    options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+});
 
 
 var app = builder.Build();
@@ -22,9 +37,11 @@ if (app.Environment.IsDevelopment())
     app.UseStatusCodePages();
 }
 
+app.UseSession();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseAuthentication(); //identity
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
