@@ -37,7 +37,8 @@ namespace BlogSite.Entities.Dtos
         [DisplayName("Resim")] //using for display
         [Required(ErrorMessage = "bir resim {0} seciniz")]
         [DataType(DataType.Upload)]
-        public IFormFile? Picture { get; set; }
+        public IFormFile? PictureFile { get; set; }
+        public string? Picture { get; set; }
 
     }
 }

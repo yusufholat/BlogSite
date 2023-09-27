@@ -4,8 +4,8 @@ using BlogSite.Shared.Entities.Abstract;
 
 namespace BlogSite.Entities.Dtos
 {
-    public class UserListDto : DtoGetBase
+    public class UserDto : DtoGetBase
     {
-        public IList<User> Users { get; set; }
+        public User User { get; set; }
     }
 }

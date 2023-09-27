@@ -1,3 +1,4 @@
+using BlogSite.Mvc.AutoMapper.Profiles;
 using BlogSite.Services.AutoMapper.Profiles;
 using BlogSite.Services.Extensions;
 using System.Text.Json;
@@ -11,7 +12,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonO
     opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
 builder.Services.AddSession();
-builder.Services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile));
+builder.Services.AddAutoMapper(typeof(CategoryProfile), typeof(ArticleProfile), typeof(UserProfile));
 builder.Services.LoadMyServices();
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -43,15 +44,13 @@ app.UseRouting();
 app.UseAuthentication(); //identity
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapAreaControllerRoute(
+app.MapAreaControllerRoute(
         name: "Admin",
         areaName: "Admin",
         pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
     );
-    endpoints.MapDefaultControllerRoute();
-});
+app.MapDefaultControllerRoute();
+
 //app.MapGet("/", () => "Hello World!");
 
 app.Run();
