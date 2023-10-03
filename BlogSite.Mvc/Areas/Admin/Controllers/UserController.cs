@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BlogSite.Mvc.Areas.Admin.Controllers
 {
@@ -33,11 +34,57 @@ namespace BlogSite.Mvc.Areas.Admin.Controllers
             });
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userListDto = JsonSerializer.Serialize(new UserListDto
+            {
+                Users = users,
+                ResultStatus = ResultStatus.Success
+            }, new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+            return Json(userListDto);
+        }
+
 
         [HttpGet]
         public IActionResult Add()
         {
             return PartialView("_UserAddPartial");
+        }
+
+        public async Task<JsonResult> Delete(int userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                var deletedUser = JsonSerializer.Serialize(new UserDto
+                {
+                    ResultStatus = ResultStatus.Success,
+                    Message = $"*{user.UserName} adli kullanici basariyla silinmistir",
+                    User = user
+                });
+                return Json(deletedUser);
+            }
+            else
+            {
+                string errorMessages = String.Empty;
+                foreach (var error in result.Errors)
+                {
+                    errorMessages = $"{error.Description}\n";
+                }
+                var deletedUserErrorModel = JsonSerializer.Serialize(new UserDto
+                {
+                    ResultStatus = ResultStatus.Error,
+                    Message = $"{user.UserName} adli kullanici silinirken bazi hatalar olustu. \n {errorMessages}",
+                    User = user
+                });
+                return Json(deletedUserErrorModel);
+            }
         }
 
         [HttpPost]
