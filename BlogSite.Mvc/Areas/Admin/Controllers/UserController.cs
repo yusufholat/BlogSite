@@ -255,6 +255,12 @@ namespace BlogSite.Mvc.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public ViewResult AccessDenied()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "Admin, Editor")]
         public async Task<string> ImageUpload(string userName, IFormFile pictureFile)
         {
