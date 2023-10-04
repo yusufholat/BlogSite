@@ -1,4 +1,5 @@
 ﻿using BlogSite.Entities.Concreate;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Text;
@@ -47,6 +48,44 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
+            var adminUser = new User
+            {
+                Id = 1,
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                PhoneNumber = "+5555555555",
+                Picture = "defaultUser.png",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+            adminUser.PasswordHash = CreatePasswordHash(adminUser, "admin");
+
+            var editorUser = new User
+            {
+                Id = 2,
+                UserName = "editor",
+                NormalizedUserName = "EDITOR",
+                Email = "editor@gmail.com",
+                NormalizedEmail = "EDITOR@GMAIL.COM",
+                PhoneNumber = "+5555555555",
+                Picture = "defaultUser.png",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+            editorUser.PasswordHash = CreatePasswordHash(editorUser, "editor");
+
+            builder.HasData(adminUser, editorUser);
+        }
+
+        private string CreatePasswordHash(User user, string password)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            return passwordHasher.HashPassword(user, password);
         }
     }
 }

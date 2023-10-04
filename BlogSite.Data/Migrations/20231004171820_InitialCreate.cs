@@ -252,13 +252,40 @@ namespace BlogSite.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "eb20e641-2305-433f-ad49-7858794ef892", "Admin", "ADMIN" },
+                    { 2, "ffec60af-f6e6-4de4-8e78-e2eb5c05b64e", "Editor", "EDITOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 0, "71f58180-c870-400d-a874-0f1335fcd7cc", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEB8u6dYj6wNj3QbanJ2HkafLN6RD2LXraiaEtiCfWSE2kuE67IIw7FXOLmNeTABNKw==", "+5555555555", true, "defaultUser.png", "3d126a72-cce0-4bda-abcd-e8a55dd12019", false, "admin" },
+                    { 2, 0, "36c21c28-084d-46fc-918b-5ec8584869d8", "editor@gmail.com", true, false, null, "EDITOR@GMAIL.COM", "EDITOR", "AQAAAAIAAYagAAAAEB3SpoX6U/eDged3hliZ9nB+k4660eKGIxEl8Q99N+MVTMPZbfg5Ftoy92C+T1RDLQ==", "+5555555555", true, "defaultUser.png", "77e4a393-c0ca-4c8e-93aa-86efaeed28d7", false, "editor" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2023, 9, 27, 14, 19, 28, 367, DateTimeKind.Local).AddTicks(5869), "C# programlama dili", true, false, "InitialCreate", new DateTime(2023, 9, 27, 14, 19, 28, 367, DateTimeKind.Local).AddTicks(5869), "C#", "C# blog kategorisi" },
-                    { 2, "InitialCreate", new DateTime(2023, 9, 27, 14, 19, 28, 367, DateTimeKind.Local).AddTicks(5873), "C++ programlama dili", true, false, "InitialCreate", new DateTime(2023, 9, 27, 14, 19, 28, 367, DateTimeKind.Local).AddTicks(5873), "C++", "C++ blog kategorisi" },
-                    { 3, "InitialCreate", new DateTime(2023, 9, 27, 14, 19, 28, 367, DateTimeKind.Local).AddTicks(5876), "Java programlama dili", true, false, "InitialCreate", new DateTime(2023, 9, 27, 14, 19, 28, 367, DateTimeKind.Local).AddTicks(5876), "Java", "Java blog kategorisi" }
+                    { 1, "InitialCreate", new DateTime(2023, 10, 4, 20, 18, 19, 962, DateTimeKind.Local).AddTicks(3810), "C# programlama dili", true, false, "InitialCreate", new DateTime(2023, 10, 4, 20, 18, 19, 962, DateTimeKind.Local).AddTicks(3810), "C#", "C# blog kategorisi" },
+                    { 2, "InitialCreate", new DateTime(2023, 10, 4, 20, 18, 19, 962, DateTimeKind.Local).AddTicks(3813), "C++ programlama dili", true, false, "InitialCreate", new DateTime(2023, 10, 4, 20, 18, 19, 962, DateTimeKind.Local).AddTicks(3813), "C++", "C++ blog kategorisi" },
+                    { 3, "InitialCreate", new DateTime(2023, 10, 4, 20, 18, 19, 962, DateTimeKind.Local).AddTicks(3816), "Java programlama dili", true, false, "InitialCreate", new DateTime(2023, 10, 4, 20, 18, 19, 962, DateTimeKind.Local).AddTicks(3817), "Java", "Java blog kategorisi" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 }
                 });
 
             migrationBuilder.CreateIndex(
