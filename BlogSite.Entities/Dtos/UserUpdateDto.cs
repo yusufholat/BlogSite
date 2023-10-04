@@ -5,8 +5,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogSite.Entities.Dtos
 {
-    public class UserAddDto
+    public class UserUpdateDto
     {
+        [Required]
+        public int Id { get; set; }
+
         [DisplayName("Kullanici Adi")] //using for display
         [Required(ErrorMessage = "{0} adi bos gecilemez")]
         [MaxLength(50, ErrorMessage = "{0} {1} den buyuk olamaz")]
@@ -20,13 +23,6 @@ namespace BlogSite.Entities.Dtos
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
-        [DisplayName("Sifre")] //using for display
-        [Required(ErrorMessage = "{0} adi bos gecilemez")]
-        [MaxLength(30, ErrorMessage = "{0} {1} den buyuk olamaz")]
-        [MinLength(5, ErrorMessage = "{0} {1} den kucuk olamaz")]
-        [DataType(DataType.Password)]
-        public string? Password { get; set; }
-
         [DisplayName("Telefon No")] //using for display
         [Required(ErrorMessage = "{0} adi bos gecilemez")]
         [MaxLength(13, ErrorMessage = "{0} {1} den buyuk olamaz")] //tr number
@@ -34,15 +30,12 @@ namespace BlogSite.Entities.Dtos
         [DataType(DataType.PhoneNumber)]
         public string? PhoneNumber { get; set; }
 
-        [DisplayName("Resim")] //using for display
-        [Required(ErrorMessage = "bir resim {0} seciniz")]
+        [DisplayName("Resim Ekle")] //using for display
         [DataType(DataType.Upload)]
         public IFormFile? PictureFile { get; set; }
+
+        [DisplayName("Resim")] //using for display
         public string? Picture { get; set; }
 
-        public static implicit operator UserAddDto(UserUpdateDto v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
