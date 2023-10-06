@@ -29,48 +29,48 @@ namespace BlogSite.Data.Concreate.EntityFramework.Mappings
 
             builder.ToTable("Comments");
 
-            //adding some comments
-            builder.HasData(
-                new Comment
-                {
-                    Id = 1,
-                    ArticleId = 1,
-                    Text = "bu bir yorumdurr.",
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
-                    ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
-                    Note = "makale yorumudur."
-                },
-                new Comment
-                {
-                    Id = 2,
-                    ArticleId = 2,
-                    Text = "mukemmel makale.",
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
-                    ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
-                    Note = "makale yorumudur."
-                },
-                new Comment
-                {
-                    Id = 3,
-                    ArticleId = 3,
-                    Text = "faydali",
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedByName = "InitialCreate",
-                    CreatedDate = DateTime.Now,
-                    ModifiedByName = "InitialCreate",
-                    ModifiedDate = DateTime.Now,
-                    Note = "makale yorumudur."
-                }
-            );
+            ////adding some comments
+            //builder.HasData(
+            //    new Comment
+            //    {
+            //        Id = 1,
+            //        ArticleId = 1,
+            //        Text = "bu bir yorumdurr.",
+            //        IsActive = true,
+            //        IsDeleted = false,
+            //        CreatedByName = "InitialCreate",
+            //        CreatedDate = DateTime.Now,
+            //        ModifiedByName = "InitialCreate",
+            //        ModifiedDate = DateTime.Now,
+            //        Note = "makale yorumudur."
+            //    },
+            //    new Comment
+            //    {
+            //        Id = 2,
+            //        ArticleId = 2,
+            //        Text = "mukemmel makale.",
+            //        IsActive = true,
+            //        IsDeleted = false,
+            //        CreatedByName = "InitialCreate",
+            //        CreatedDate = DateTime.Now,
+            //        ModifiedByName = "InitialCreate",
+            //        ModifiedDate = DateTime.Now,
+            //        Note = "makale yorumudur."
+            //    },
+            //    new Comment
+            //    {
+            //        Id = 3,
+            //        ArticleId = 3,
+            //        Text = "faydali",
+            //        IsActive = true,
+            //        IsDeleted = false,
+            //        CreatedByName = "InitialCreate",
+            //        CreatedDate = DateTime.Now,
+            //        ModifiedByName = "InitialCreate",
+            //        ModifiedDate = DateTime.Now,
+            //        Note = "makale yorumudur."
+            //    }
+            //);
 
         }
     }

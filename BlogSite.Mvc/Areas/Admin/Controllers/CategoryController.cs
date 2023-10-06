@@ -4,6 +4,7 @@ using BlogSite.Services.Abstract;
 using BlogSite.Shared.Utilities.Extensions;
 using BlogSite.Shared.Utilities.Results.ComplexTypes;
 using BlogSite.Shared.Utilities.Results.Concreate;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -11,6 +12,7 @@ using System.Text.Json.Serialization;
 namespace BlogSite.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin, Editor")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
