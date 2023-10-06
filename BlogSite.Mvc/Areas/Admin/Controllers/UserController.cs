@@ -330,7 +330,7 @@ namespace BlogSite.Mvc.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> PasswordChange(UserPasswordChangeDto userPasswordChangeDto)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 var isVerified = await _userManager.CheckPasswordAsync(user, userPasswordChangeDto.CurrentPassword);

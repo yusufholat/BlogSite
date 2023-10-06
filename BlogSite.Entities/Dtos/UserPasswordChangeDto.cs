@@ -15,14 +15,14 @@ namespace BlogSite.Entities.Dtos
         [MaxLength(30, ErrorMessage = "{0} {1} den buyuk olamaz")]
         [MinLength(5, ErrorMessage = "{0} {1} den kucuk olamaz")]
         [DataType(DataType.Password)]
-        public string CurrentPassword { get; set; }
+        public string? CurrentPassword { get; set; }
 
         [DisplayName("yeni sifreniz")] //using for display
         [Required(ErrorMessage = "{0} adi bos gecilemez")]
         [MaxLength(30, ErrorMessage = "{0} {1} den buyuk olamaz")]
         [MinLength(5, ErrorMessage = "{0} {1} den kucuk olamaz")]
         [DataType(DataType.Password)]
-        public string NewPassword { get; set; }
+        public string? NewPassword { get; set; }
 
         [DisplayName("Su anki sifreniz")] //using for display
         [Required(ErrorMessage = "{0} adi bos gecilemez")]
@@ -30,6 +30,6 @@ namespace BlogSite.Entities.Dtos
         [MinLength(5, ErrorMessage = "{0} {1} den kucuk olamaz")]
         [DataType(DataType.Password)]
         [Compare("NewPassword",ErrorMessage ="girmis oldugunuz yeni sifreler ayni degildir")]
-        public string RepeatPassword { get; set; }
+        public string? RepeatPassword { get; set; }
     }
 }
